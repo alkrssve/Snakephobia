@@ -18,11 +18,13 @@ func _ready():
 	Global.player = self
 	
 	segments.append(head)
+	Global.segments.append(head)
 	
 	for i in 3:
 		var new_part = body_part.instance()
 		segments.append(new_part)
 		add_child(new_part)
+		Global.segments.append(new_part)
 		
 	$BoostTimer.set_paused(true)
 
@@ -71,7 +73,7 @@ func _physics_process(delta):
 		segments.pop_back()
 		$SnakeHead/Camera2D.zoom.x -= 0.05
 		$SnakeHead/Camera2D.zoom.y -= 0.05
-		$MoveTimer.wait_time = 0.05
+		$MoveTimer.wait_time = 0.05 - (Global.speed/10)
 		$BoostTimer.set_paused(false)
 	
 	if segments[0].get_node("WallDetection").is_colliding():
@@ -100,7 +102,7 @@ func _on_Timer_timeout():
 	update_position()
 
 func _on_BoostTimer_timeout():
-	$MoveTimer.wait_time = 0.2
+	$MoveTimer.wait_time = Global.speed
 	$BoostTimer.set_paused(true)
 	
 func _on_pickup_collected(pickup_type):
@@ -108,8 +110,22 @@ func _on_pickup_collected(pickup_type):
 	if pickup_type == 0:
 		var new_part = body_part.instance()
 		segments.append(new_part)
+		Global.segments.append(new_part)
 		add_child(new_part)
 		$SnakeHead/Camera2D.zoom.x += 0.05
 		$SnakeHead/Camera2D.zoom.y += 0.05
 		
+
+func _on_shopItem_collected(shop_type):
+	Global.items_purchased += 1
+	Global.collect_item(shop_type)
+	if (shop_type == 0):
+		pass
+	if (shop_type == 1):
+		$MoveTimer.wait_time -= 0.01
+	if (shop_type == 2):
+		pass
+		
+	
+
 

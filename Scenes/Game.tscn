@@ -528,6 +528,9 @@ custom_colors/font_color = Color( 0.941176, 0.862745, 0.741176, 1 )
 custom_fonts/font = SubResource( 8 )
 text = "0"
 
+[connection signal="shopItem_collected" from="ShopItems/Bullets" to="Player" method="_on_shopItem_collected"]
+[connection signal="shopItem_collected" from="ShopItems/Potion" to="Player" method="_on_shopItem_collected"]
+[connection signal="shopItem_collected" from="ShopItems/Shield" to="Player" method="_on_shopItem_collected"]
 [connection signal="pickup_collected" from="Gold/Gold1" to="Player" method="_on_pickup_collected"]
 [connection signal="pickup_collected" from="Gold/Gold2" to="Player" method="_on_pickup_collected"]
 [connection signal="pickup_collected" from="Gold/Gold3" to="Player" method="_on_pickup_collected"]

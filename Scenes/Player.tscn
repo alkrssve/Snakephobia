@@ -19,7 +19,7 @@ shape = SubResource( 1 )
 [node name="Camera2D" type="Camera2D" parent="SnakeHead"]
 current = true
 smoothing_enabled = true
-smoothing_speed = 4.0
+smoothing_speed = 3.0
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="SnakeHead"]
 position = Vector2( 2, 0 )
